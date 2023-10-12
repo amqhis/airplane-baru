@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <report 
+        id="report_Plane_Ticket"
+        string="Boarding_Pass"
+        model="nama.pesawat"
+        report_type="qweb-pdf"
+        name="airplane.report_ticket"
+        file="airplane.report_ticket"/>
+        
+</odoo>

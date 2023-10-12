@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_plane_kanban" model="ir.ui.view">
+        <field name="name">nama.pesawat.kanban</field>
+        <field name="model">nama.pesawat</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="tanggal"/> 
+                <field name="tujuan_kota"/> 
+                <field name="maskapai"/>
+                <field name="kota_keberangkatan"/>
+                <field name="kelas_pesawat"/>
+                <field name="note"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <ul> 
+                                    <li>
+                                        Name: <field name="name"/>
+                                    </li>
+                                    <li> 
+                                        Age: <field name="age"/>
+                                    </li>
+                                    <li> 
+                                        Gender: <field name="gender"/>
+                                    </li>
+                                    <li> 
+                                        Tanggal: <field name="tanggal"/>
+                                    </li>
+                                    <li> 
+                                        Tujuan_Kota: <field name="tujuan_kota"/>
+                                    </li>
+                                    <li> 
+                                        Maskapai: <field name="maskapai"/>
+                                    </li>
+                                    <li> 
+                                        Kota_Keberangkatan: <field name="kota_keberangkatan"/>
+                                    </li>
+                                    <li> 
+                                        Kelas_Pesawat: <field name="kelas_pesawat"/>
+                                    </li>
+                                    <li> 
+                                        Note: <field name="note"/>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t> 
+                </templates>
+            </kanban>
+        </field> 
+    </record>
+
+
+<record id="view_plane_tree" model="ir.ui.view">
+        <field name="name">nama.pesawat.tree</field>
+        <field name="model">nama.pesawat</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <field name="tanggal"/> 
+                <field name="tujuan_kota"/>
+                <field name="maskapai"/>
+                <field name="kota_keberangkatan"/>
+                <field name="kelas_pesawat"/>
+                <field name="note"/>
+                <field name="state"/>
+            </tree>
+        </field>          
+    </record>
+
+    <record id="view_plane_form" model="ir.ui.view">
+        <field name="name">nama.pesawat.form</field>
+        <field name="model">nama.pesawat</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" options="{'clickable': 1}"/>
+                </header>
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <div class="oe_title"> 
+                        <h1>
+                            <field name="reference" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="tanggal"/>
+                            <field name="tujuan_kota"/>
+                            <field name="maskapai"/>
+                            <field name="kelas_pesawat"/>
+                        </group>
+                        <group> 
+                            <field name="gender"/>
+                            <field name="age"/>
+                            <field name="kota_keberangkatan"/>
+                            <field name="note"/>
+                        </group> 
+                    </group> 
+                </sheet>
+            </form> 
+        </field>          
+    </record>
+
+    <record id ="view_plane_search" model="ir.ui.view">
+        <field name="name">nama.pesawat.search</field>
+        <field name="model">nama.pesawat</field>
+        <field name="arch" type="xml">
+            <search string="plane">
+                <field name="name"/>
+                <field name="age"/>
+                <field name="tujuan_kota"/>
+                <field name="tanggal"/>
+                <field name="maskapai"/>
+                <field name="kota_keberangkatan"/>
+                <field name="kelas_pesawat"/>
+                <separator/>
+                <filter string="male" name="Male" domain="[('gender', '=', 'Male')]"/>
+                <filter string="female" name="Female" domain="[('gender', '=', 'Female')]"/>
+                <filter string="other" name="Other" domain="[('gender', '=', 'Other')]"/>
+                <group expand="1" string="Group By">
+                    <filter string="Gender" name="gender" context="{'group_by' : 'gender'}"/>
+                    <filter string="Tanggal" name="tanggal" context="{'group_by' : 'tanggal'}"/>
+                    <filter string="Tujuan_Kota" name="tujuan_kota" context="{'group_by' : 'tujuan_kota'}"/>
+                    <filter string="Maskapai" name="maskapai" context="{'group_by' : 'maskapai'}"/>
+                    <filter string="Kota_Keberangkatan" name="kota_keberangkatan" context="{'group_by' : 'kota_keberangkatan'}"/>
+                    <filter string="Kelas_Pesawat" name="kelas_pesawat" context="{'group_by' : 'kelas_pesawat'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="plane_action" model="ir.actions.act_window">
+        <field name="name">plane</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">nama.pesawat</field>
+        <field name="view_mode">tree,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_noncontent_smiling_face">
+                create your first trip and travel with us!!
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="kode_plane_root"
+        name="kode_plane"
+        sequence="10"/>
+
+    <menuitem
+        id="harga_plane"
+        name="harga_plane"
+        parent="kode_plane_root"
+        action="plane_action"
+        sequence="10"/> 
+        
+</odoo>
+ 
