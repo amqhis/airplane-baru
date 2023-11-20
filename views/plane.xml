@@ -1,60 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="view_plane_kanban" model="ir.ui.view">
-        <field name="name">nama.pesawat.kanban</field>
-        <field name="model">nama.pesawat</field>
-        <field name="arch" type="xml">
-            <kanban>
-                <field name="name"/>
-                <field name="age"/>
-                <field name="gender"/>
-                <field name="tanggal"/> 
-                <field name="tujuan_kota"/> 
-                <field name="maskapai"/>
-                <field name="kota_keberangkatan"/>
-                <field name="kelas_pesawat"/>
-                <field name="note"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
-                                <ul> 
-                                    <li>
-                                        Name: <field name="name"/>
-                                    </li>
-                                    <li> 
-                                        Age: <field name="age"/>
-                                    </li>
-                                    <li> 
-                                        Gender: <field name="gender"/>
-                                    </li>
-                                    <li> 
-                                        Tanggal: <field name="tanggal"/>
-                                    </li>
-                                    <li> 
-                                        Tujuan_Kota: <field name="tujuan_kota"/>
-                                    </li>
-                                    <li> 
-                                        Maskapai: <field name="maskapai"/>
-                                    </li>
-                                    <li> 
-                                        Kota_Keberangkatan: <field name="kota_keberangkatan"/>
-                                    </li>
-                                    <li> 
-                                        Kelas_Pesawat: <field name="kelas_pesawat"/>
-                                    </li>
-                                    <li> 
-                                        Note: <field name="note"/>
-                                    </li>
-                                </ul>
-                            </div>
+<record id="view_plane_kanban" model="ir.ui.view">
+    <field name="name">nama.pesawat.kanban</field>
+    <field name="model">nama.pesawat</field>
+    <field name="arch" type="xml">
+        <kanban>
+            <field name="name"/>
+            <field name="age"/>
+            <field name="gender"/>
+            <field name="tanggal"/> 
+            <field name="tujuan_kota"/> 
+            <field name="maskapai"/>
+            <field name="kota_keberangkatan"/>
+            <field name="kelas_pesawat"/>
+            <field name="note"/>
+            <field name="image"/> <!-- Tambahkan ini -->
+            <field name="id"/>
+            <field name="color"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click"  t-attf-style="background-color:#{record.color.raw_value === 'green' ? 'green' : 'white'}">
+                        <div class="o_kanban_image"> 
+                            <img class="o_kanban_image_inner_pic"
+                                t-att-src="kanban_image('nama.pesawat', 'image', record.id.raw_value)"/>
                         </div>
-                    </t> 
-                </templates>
-            </kanban>
-        </field> 
-    </record>
+                        <div class="oe_kanban_details">
+                            <ul> 
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Name: <field name="name"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Age: <field name="age"/>
+                                </li>
+                                <!-- Tambahkan logika kondisional ke field lainnya -->
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Tanggal: <field name="tanggal"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Tujuan_Kota: <field name="tujuan_kota"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Maskapai: <field name="maskapai"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Kota_Keberangkatan: <field name="kota_keberangkatan"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Kelas_Pesawat: <field name="kelas_pesawat"/>
+                                </li>
+                                <li t-attf-style="color:#{record.color.raw_value === 'green' ? 'green' : 'red'}">
+                                    Note: <field name="note"/>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </t> 
+            </templates>
+        </kanban>
+    </field> 
+</record>
+
 
 
 <record id="view_plane_tree" model="ir.ui.view">
@@ -82,9 +88,21 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="state" widget="statusbar" options="{'clickable': 1}"/>
+                    <button id="button_confirm" name="action_confirm" string="Confirm" class="btn-primary" states="inprogress" type="object"/>
+                        <button id="button_done" name="action_done" string="Mark As Done" class="btn-primary" states="confirm" type="object"/>
+                        <button id="button_inprogress" name="action_inprogress" string="Set To Inprogress" class="btn-primary" states="cancel" type="object"/>
+                        <button id="button_cancel" name="action_cancel" string="Cancel" states="inprogress,confirm,done" type="object"/> 
+                        <field name="state" widget="statusbar" statusbar_visible="inprogress,confirm,done"/>
                 </header>
                 <sheet>
+                    <div class="alert alert-info text-center o_form_header" role="alert">
+                        <a class="close" data-dismiss="alert" href="#">x</a> 
+                        <div>
+                            <strong>Get Your Tickets By Filling in The Form Below!!</strong>
+                        </div> 
+                        <div>Hope You Have a Pleasant Trip! <field name="name" readonly="1"/> 
+                        </div>
+                    </div>
                     <field name="image" widget="image" class="oe_avatar"/>
                     <div class="oe_title"> 
                         <h1>

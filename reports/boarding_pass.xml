@@ -5,17 +5,49 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    <div class="col-12 text-left-align">
-                        <table>
-                            <h2>Boarding Pass</h2>
-                            Name: <h2 t-field="doc.name"/>
-                            Gender: <h2 t-field="doc.gender"/>
-                            Tanggal: <h2 t-field="doc.tanggal"/>
-                            Kota_Keberangkatan: <h2 t-field="doc.kota_keberangkatan"/>
-                            Tujuan_Kota: <h2 t-field="doc.tujuan_kota"/>
-                            Maskapai: <h2 t-field="doc.maskapai"/>
-                            Kelas_Pesawat: <h2 t-field="doc.kelas_pesawat"/>
-                            Note: <h2 t-field="doc.note"/> 
+                    <div class="col-12 text-center" style="border: 1px solid #000; padding: 10px; max-width: 800px; margin: 0 auto;">
+                        <table style="width: 100%; border-collapse: collapse;">
+                            <tr>
+                                <td colspan="4" style="text-align: center;">
+                                    <img t-if="doc.image" t-att-src="'data:image/jpeg;base64,' + doc.image.decode('utf-8')" style="max-width: 200px; margin-top: 15px;" />
+                                    <h2 style="font-weight: bold; font-size: 50px; margin-top: 20px; margin-bottom: 10px;">Boarding Pass</h2>
+                                    <p style="font-weight: bold; font-size: 30px; margin-top: 20px; margin-bottom: 20px;"><span t-field="doc.reference"/></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="width: 25%; text-align: left; padding-right: 20px;">
+                                    <p><strong>Name:</strong> <span t-field="doc.name"/></p>
+                                    <p><strong>Gender:</strong> <span t-field="doc.gender"/></p>
+                                    <p><strong>Tanggal:</strong> <span t-field="doc.tanggal"/></p>
+                                    <p><strong>Kota_Keberangkatan:</strong> <span t-field="doc.kota_keberangkatan"/></p>
+                                </td>
+                                <td style="width: 25%; text-align: right; padding-right: 20px;">
+                                    <p><strong>Tujuan_Kota:</strong> <span t-field="doc.tujuan_kota"/></p>
+                                    <p><strong>Maskapai:</strong> <span t-field="doc.maskapai"/></p>
+                                    <p><strong>Kelas_Pesawat:</strong> <span t-field="doc.kelas_pesawat"/></p>
+                                    <p><strong>Note:</strong> <span t-field="doc.note"/></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="text-align: center;">
+                                    <p><strong>Ketentuan Setelah Mendapatkan Boarding Pass:</strong></p>
+                                    <div style="border: 1px solid #000; padding: 10px; margin: 10px 0; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                                        <ul>
+                                            <li>Periksa Data pada Boarding Pass.</li>
+                                            <li>Bawalah Dokumen Perjalanan Lengkap.</li>
+                                            <li>Dimohon untuk menyimpan Boarding Pass dengan baik dan aman.</li>
+                                            <li>E-Boarding Pass dapat ditunjukkan melalui gawai kepada petugas AVSEC (aviation security) dan petugas boarding gate sebagai pass masuk.</li>
+                                            <li>Patuhi aturan Maskapai.</li>
+                                            <li>Ikuti petunjuk kru pesawat.</li>
+                                        </ul>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="text-align: center;">
+                                    <h2 style="font-weight: bold; font-size: 15px; margin-top: 15px; margin-bottom: 20px;">Patuhi ketentuan diatas untuk memastikan perjalanan Anda berjalan lancar, aman, dan sesuai dengan aturan yang berlaku. Selalu patuhi peraturan maskapai dan petunjuk dari petugas bandara serta kru pesawat.</h2>
+                                </td>
+                            </tr>
                         </table>
                     </div>
                 </t> 

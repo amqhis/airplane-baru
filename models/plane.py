@@ -2,6 +2,8 @@ from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 from datetime import date
 from odoo.exceptions import UserError
+from io import BytesIO
+from reportlab.pdfgen import canvas
 
 class NamaPesawat(models.Model):
     _name = "nama.pesawat"
@@ -18,6 +20,11 @@ class NamaPesawat(models.Model):
         for record in self:
             if record.tanggal and record.tanggal < fields.Date.today():
                 raise UserError("Anda tidak dapat memilih tanggal penerbangan sebelum dari hari ini.")
+    
+    color = fields.Selection([
+        ('red', 'Red'),
+        ('green', 'Green')
+    ], string='Color')
     
     gender = fields.Selection([
         ('Male', 'male'),
@@ -57,13 +64,13 @@ class NamaPesawat(models.Model):
         ('super_air_jet', 'Super Air Jet'),
         ('sriwijaya_air', 'Sriwijaya Air')],
         required=True, default='garuda')
+
     kelas_pesawat = fields.Selection([
         ('economy_class', 'Economy Class'),
         ('bisnis_class', 'Bisnis Class'),
         ('first_class', 'First Class')],
         required=True, default='economy_class')
     note = fields.Text(string='Description', default='New Penumpang')
-    # state = fields.Selection([('draft', 'Draft'), ('confirm', 'Confirmed'), ('success', 'Success'), ('canceled', 'Canceled')], default='draft', string="status")
     state = fields.Selection([ 
         ('inprogress', 'Inprogress'),
         ('confirm', 'Confirmed'),
@@ -82,6 +89,7 @@ class NamaPesawat(models.Model):
 
     def action_cancel(self):
         self.state = 'cancel'
+
     image = fields.Binary(string="Penumpang Image" ,max_width=10 ,max_height=10)
     
     @api.model
@@ -92,4 +100,5 @@ class NamaPesawat(models.Model):
             vals['reference'] = self.env['ir.sequence'].next_by_code('nama.pesawat') or _('New')
         res = super(NamaPesawat, self).create(vals)
         return res
+    
     
