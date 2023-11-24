@@ -10,22 +10,22 @@
                             <tr>
                                 <td colspan="4" style="text-align: center;">
                                     <img t-if="doc.image" t-att-src="'data:image/jpeg;base64,' + doc.image.decode('utf-8')" style="max-width: 200px; margin-top: 15px;" />
-                                    <h2 style="font-weight: bold; font-size: 50px; margin-top: 20px; margin-bottom: 10px;">Boarding Pass</h2>
-                                    <p style="font-weight: bold; font-size: 30px; margin-top: 20px; margin-bottom: 20px;"><span t-field="doc.reference"/></p>
+                                    <h2 style="font-weight: bold; font-size: 50px; margin-top: 20px; margin-bottom: 5px;">Boarding Pass</h2>
+                                    <p style="font-weight: bold; font-size: 30px; margin-top: 10px; margin-bottom: 20px;"><span t-field="doc.reference"/></p>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="width: 25%; text-align: left; padding-right: 20px;">
-                                    <p><strong>Name:</strong> <span t-field="doc.name"/></p>
-                                    <p><strong>Gender:</strong> <span t-field="doc.gender"/></p>
-                                    <p><strong>Tanggal:</strong> <span t-field="doc.tanggal"/></p>
+                                    <p><strong>Name              :</strong> <span t-field="doc.name"/></p>
+                                    <p><strong>Gender            :</strong> <span t-field="doc.gender"/></p>
+                                    <p><strong>Tanggal           :</strong> <span t-field="doc.tanggal"/></p>
                                     <p><strong>Kota_Keberangkatan:</strong> <span t-field="doc.kota_keberangkatan"/></p>
                                 </td>
                                 <td style="width: 25%; text-align: right; padding-right: 20px;">
-                                    <p><strong>Tujuan_Kota:</strong> <span t-field="doc.tujuan_kota"/></p>
-                                    <p><strong>Maskapai:</strong> <span t-field="doc.maskapai"/></p>
+                                    <p><strong>Tujuan_Kota  :</strong> <span t-field="doc.tujuan_kota"/></p>
+                                    <p><strong>Maskapai     :</strong> <span t-field="doc.maskapai"/></p>
                                     <p><strong>Kelas_Pesawat:</strong> <span t-field="doc.kelas_pesawat"/></p>
-                                    <p><strong>Note:</strong> <span t-field="doc.note"/></p>
+                                    <p><strong>Note         :</strong> <span t-field="doc.note"/></p>
                                 </td>
                             </tr>
                             <tr>
